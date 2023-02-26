@@ -11,13 +11,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_post")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
 
     @Id
