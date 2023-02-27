@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <form th:object="${post}" method="post" th:action="@{/newpost}">
+            <label for="title">Título</label><br>
+            <input type="text" name="title" placeholder="Titulo *">
+            <br>
+            <br>
+
+            <label for="title">Autor</label><br>
+            <input type="text" name="author" placeholder="Autor *">
+            <br>
+            <br>
+
+            <label for="title">Texto</label><br>
+            <textarea name="body" placeholder="Texto" id="" cols="30" rows="10"></textarea>
+            <br>
+            <br>
+
+            <small>(*) Campos Obrigatórios</small>
+            <br>
+            <br>
+
+            <button type="submit">Salvar</button>
+            <a th:href="@{/posts}">Cancelar</a>
+
+        </form>
+    </div>
+</body>
+
+</html>
