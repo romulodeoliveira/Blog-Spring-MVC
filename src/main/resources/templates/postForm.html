@@ -1,40 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="text-bg-light p-3">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 </head>
 
 <body>
-    <div>
-        <form th:object="${post}" method="post" th:action="@{/newpost}">
-            <label for="title">Título</label><br>
-            <input type="text" name="title" placeholder="Titulo *">
-            <br>
-            <br>
 
-            <label for="title">Autor</label><br>
-            <input type="text" name="author" placeholder="Autor *">
-            <br>
-            <br>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/posts}">RomulodeOliveira</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/posts}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contatos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://github.com/romulodeoliveira">GitHub</a></li>
+                            <li><a class="dropdown-item" href="https://gitlab.com/romulodeoliveira">GitLab</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="https://www.linkedin.com/in/romulodeoliveira/">LinkedIn</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
-            <label for="title">Texto</label><br>
-            <textarea name="body" placeholder="Texto" id="" cols="30" rows="10"></textarea>
-            <br>
-            <br>
+    <main class="text-bg-light p-3">
+        <div style="max-width: 80%;" class="container-sm">
+            <form th:object="${post}" method="post" th:action="@{/newpost}" class="row g-3">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título</label>
+                    <input type="text" name="title" placeholder="Titulo *" class="form-control">
+                </div>
 
-            <small>(*) Campos Obrigatórios</small>
-            <br>
-            <br>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Autor</label>
+                    <input type="text" name="author" placeholder="Autor *" class="form-control">
+                </div>
 
-            <button type="submit">Salvar</button>
-            <a th:href="@{/posts}">Cancelar</a>
+                <div class="mb-3">
+                    <label for="body" class="form-label">Texto</label>
+                    <textarea name="body" placeholder="Texto" id="summernote" class="form-control" cols="30" rows="10"></textarea>
+                </div>
 
-        </form>
-    </div>
+                <div class="mb-3">
+                    <small>(*) Campos Obrigatórios</small>
+                </div>
+
+                <div th:if="${not #strings.isEmpty(message)}" class="alert alert-danger d-flex align-items-center" role="alert">
+                    <p th:text="${message}"></p>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a th:href="@{/posts}" class="btn btn-light">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        $('#summernote').summernote({
+            placeholder: 'Texto *',
+            tabsize: 2,
+            height: 300
+        });
+    </script>
+
 </body>
 
 </html>
