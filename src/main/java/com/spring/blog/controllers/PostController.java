@@ -23,6 +23,8 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    // GET
+
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public ModelAndView getPosts() {
         ModelAndView mv = new ModelAndView("posts");
@@ -31,6 +33,8 @@ public class PostController {
         return mv;
     }
 
+    // GET One
+
     @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
     public ModelAndView getPostDetails(@PathVariable("id") long id) {
         ModelAndView mv = new ModelAndView("postDetails");
@@ -38,6 +42,8 @@ public class PostController {
         mv.addObject("post", post);
         return mv;
     }
+
+    // POST
 
     @RequestMapping(value = "/newpost", method = RequestMethod.GET)
     public String getPostForm() {
@@ -52,6 +58,45 @@ public class PostController {
         }
         post.setDate(LocalDate.now());
         postService.save(post);
+        return "redirect:/posts";
+    }
+
+    // PUT
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public ModelAndView getEditForm(@PathVariable("id") long id) {
+        ModelAndView mv = new ModelAndView("editForm");
+        Post post = postService.findById(id);
+        mv.addObject("post", post);
+        return mv;
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String updatePost(@PathVariable("id") long id, @Valid Post post, BindingResult result,
+            RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("message", "Verifique se preencheu todos os campos obrigatórios!");
+            return "redirect:/posts/" + id + "/edit";
+        }
+        post.setId(id);
+        post.setDate(LocalDate.now());
+        postService.save(post);
+        return "redirect:/posts/" + id;
+    }
+
+    // DELETE
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView getDeletePost(@PathVariable("id") long id) {
+        ModelAndView mv = new ModelAndView("deletePost");
+        Post post = postService.findById(id);
+        mv.addObject("post", post);
+        return mv;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String deletePost(@PathVariable("id") long id) {
+        postService.deleteById(id);
         return "redirect:/posts";
     }
 
