@@ -29,4 +29,22 @@ public class PostServiceImpl implements PostService {
     public Post save(Post obj) {
         return postRepository.save(obj);
     }
+
+    @Override
+    public void deleteById(long id) {
+        postRepository.deleteById(id);
+    }
+
+    @Override
+    public Post update(Post post) {
+        Post existingPost = postRepository.findById(post.getId()).orElse(null);
+        if (existingPost != null) {
+            existingPost.setTitle(post.getTitle());
+            existingPost.setAuthor(post.getAuthor());
+            existingPost.setBody(post.getBody());
+            existingPost.setDate(post.getDate());
+            return postRepository.save(existingPost);
+        }
+        return null;
+    }
 }
