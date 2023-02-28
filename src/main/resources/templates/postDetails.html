@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${post.title}"></title>
+    <title th:text="'💡 | ' + ${post.title}"></title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
             <span th:text="${post.author}"></span>
             <span th:text="${post.date}"></span>
         </p>
-        <p th:text="${post.body}"></p>
+        <p th:utext="${post.body}"></p>
     </div>
 
 </body>
