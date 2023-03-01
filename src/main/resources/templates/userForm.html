@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <form th:object="${user} " method="post" th:action="@{/new-user}">
+
+            <div>
+                <label for="firstname">Primeiro Nome</label>
+                <input type="text" name="firstName" placeholder="Primeiro Nome *">
+            </div>
+
+            <div>
+                <label for="">Nome do Meio</label>
+                <input type="text" name="middleName" placeholder="">
+            </div>
+
+            <div>
+                <label for="">Último Nome</label>
+                <input type="text" name="lastName" placeholder="Último Nome *">
+            </div>
+
+            <div>
+                <label for="">Nome de Usuário</label>
+                <input type="text" name="userName" placeholder="Nome de Usuário *">
+            </div>
+
+            <div>
+                <label for="">Senha</label>
+                <input type="password" name="password" placeholder="Senha *">
+            </div>
+
+            <div>
+                <label for="">Email</label>
+                <input type="text" name="email" placeholder="Email *">
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary">Salvar</button>
+            <a th:href="@{/all-users}" class="btn btn-light">Cancelar</a>
+
+        </form>
+    </div>
+</body>
+
+</html>
