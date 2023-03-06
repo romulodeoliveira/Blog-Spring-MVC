@@ -4,11 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.spring.blog.models.User;
@@ -56,32 +51,4 @@ public class UserDetailsServiceImpl implements MyUserDetailsService {
         return null;
     }
 
-    //
-    /*
-     * @Override
-     * public UserDetails loadUserByUsername(String username) throws
-     * UsernameNotFoundException {
-     * 
-     * User user = userRepository.findByUserName(username);
-     * if (user == null) {
-     * throw new UsernameNotFoundException("Usuário não encontrado");
-     * }
-     * 
-     * // Cria uma lista de permissões
-     * 
-     * List<String> roles = user.getRoles();
-     * String[] rolesArray = roles.toArray(new String[roles.size()]);
-     * List<GrantedAuthority> authorities =
-     * AuthorityUtils.createAuthorityList(rolesArray);
-     * 
-     * return new org.springframework.security.core.userdetails.User(
-     * user.getUserName(),
-     * user.getPassword(),
-     * true,
-     * true,
-     * true,
-     * true,
-     * authorities);
-     * }
-     */
 }
